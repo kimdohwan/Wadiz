@@ -7,7 +7,6 @@ jupyter_test
 /app/reward/data
 /app/reward/driver
 
-
 # project Secrets
 /.secrets
 
