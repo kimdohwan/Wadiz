@@ -1,20 +1,17 @@
 from django.shortcuts import render
 
-from reward.models import Reward
+from reward.models import Product
 
 
 def index(request):
     # TEMPLATE 설정 app/template 추
 
-    reward = Reward.objects.all()
+    products = Product.objects.all()
+
+    print('메인페이지')
 
     context = {
-        'rewards': reward
+        'products': products
     }
 
-    # if Reward.objects.count() < 10:
-    #     WadizCrawler.get_item_list()
-
     return render(request, 'production/product-list.html', context)
-
-    # return render(request, 'index.html')
