@@ -59,13 +59,13 @@ class WadizCrawler:
 
         url = 'https://wadiz.kr/web/wreward/category/294'
 
-        file_path = 'reward/data/wadiz_reward_list2.html'
+        file_path = 'reward/data/wadiz_reward_list4.html'
 
         driver = webdriver.Chrome('reward/driver/chromedriver')
 
         driver.get(url)
 
-        time.sleep(5)
+        time.sleep(10)
 
         if not os.path.exists(file_path):
 
