@@ -3,6 +3,9 @@
 # utils
 jupyter_test
 
+#crwaling
+app/reward/data
+
 # project Secrets
 /.secrets
 
