@@ -4,7 +4,7 @@
 jupyter_test
 
 #crwaling
-app/reward/data
+data
 
 # project Secrets
 /.secrets
