@@ -20,10 +20,10 @@ class ProductCategoryList(generics.ListAPIView):
     def get_queryset(self):
         category = self.request.query_params.get('category', '')
         product_name = self.request.query_params.get('product_name', '')
-        is_funding = self.request.query_params.get('is_funding', True)
+        is_funding = self.request.query_params.get('is_funding', 'A')
 
         return Product.objects.filter(product_type__contains=category, product_name__contains=product_name,
-                                      product_is_funding=is_funding)
+                                      product_is_funding__contains=is_funding)
 
 
 class ProductFundingList(mixins.RetrieveModelMixin, generics.GenericAPIView):

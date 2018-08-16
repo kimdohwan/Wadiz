@@ -17,6 +17,7 @@ __all__ = (
 def reward_list(request):
     # Product.objects.all().delete()
     # WadizCrawler.start()
+    # WadizCrawler.create_detail_html()
     print('리워드 실행')
 
     if Product.objects.count() < 10:
@@ -45,7 +46,7 @@ class WadizCrawler:
         'product_total_amount': 0,
         'product_interested_count': 0,
         'product_description': '',
-        'product_is_funding': True,
+        'product_is_funding': '',
         'product_video_url': '',
     }
 
@@ -56,15 +57,15 @@ class WadizCrawler:
     @classmethod
     def start(cls):
 
-        url = 'https://wadiz.kr/web/wreward/category'
+        url = 'https://wadiz.kr/web/wreward/category/294'
 
-        file_path = 'reward/data/wadiz_reward_list.html'
+        file_path = 'reward/data/wadiz_reward_list2.html'
 
         driver = webdriver.Chrome('reward/driver/chromedriver')
 
         driver.get(url)
 
-        time.sleep(10)
+        time.sleep(5)
 
         if not os.path.exists(file_path):
 
@@ -135,10 +136,10 @@ class WadizCrawler:
             remain_time = datetime.datetime(int(y), int(m), int(d)) - today
 
             if remain_time.days > -1:
-                product_is_funding = True
+                product_is_funding = 'YA'
 
             else:
-                product_is_funding = False
+                product_is_funding = 'NA'
 
             is_video = soup.select_one('div.video-wrap div:nth-of-type(1)')
 
@@ -208,7 +209,13 @@ class WadizCrawler:
                     reward_total_count = reward_sold_count
 
                 if reward_on_sale:
-                    reward_total_count = reward.select_one('p.reward-qty strong').get_text(strip=True)
+
+                    total_count_check = reward.select_one('p.reward-qty strong')
+
+                    if total_count_check is not None:
+                        reward_total_count = reward.select_one('p.reward-qty strong').get_text(strip=True)
+                    else:
+                        reward_total_count = '0'
 
                 Reward.objects.create(
                     reward_name=reward_name,

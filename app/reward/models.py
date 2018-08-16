@@ -6,6 +6,14 @@ from django.conf import settings
 
 class Product(models.Model):
 
+    ON = 'YA'
+    OFF = 'NA'
+
+    FUNDING_STATUS = (
+        (ON, 'Yes'),
+        (OFF, 'No'),
+    )
+
     product_name = models.CharField(max_length=100)
 
     product_type = models.CharField(max_length=100)
@@ -22,7 +30,11 @@ class Product(models.Model):
 
     product_end_time = models.CharField(max_length=100)
 
-    product_is_funding = models.BooleanField(default=True)
+    product_is_funding = models.CharField(
+            max_length=3,
+            choices=FUNDING_STATUS,
+            default=ON
+    )
 
     product_video_url = models.CharField(max_length=100)
 

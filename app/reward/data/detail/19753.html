@@ -55,7 +55,7 @@
 <link rel="mask-icon" href="/resources/static/svg/wadiz-simple.svg" color="#00CCA3">
 <link rel="shortcut icon" href="https://www.wadiz.kr/resources/static/icon/favicon.ico">
 <script type="text/javascript">
-window.wadizWebManifest={"0":"0.js?61408d0286da15584bcf","1":"1.js?8ff0114a688944232c42","2":"2.js?25035a58b4f8c73f7b37","3":"3.js?fc4368f5c0ebd2b9e5b6","4":"4.js?7f17e5241f9c318064c3","5":"equity.js?a342986142f7cbe9f8b8","6":"landing.js?ab0468012ff1ad5c5585","7":"reward.js?08b59b430f2c075fd4a5","8":"equity-payment.js?6e6444968aaf543da6c6","9":"personal-message.js?2218450c86d5f7cde89b","10":"coming.js?78097e7d9683282e673e","11":"account.js?f43dcb948e3efa269316","12":"studio.js?16d0663b92d27ceafbee","13":"support-signature.js?be820fe2c74449b6a2f1","14":"equity-pre-quiz.js?db0704adb91c373264d1","15":"social.js?7f3ffdb4f9228d482664","16":"openfunding.js?8784fc957ae2177f83fd","17":"terms.js?13135e65aabd0555bf71","18":"school.js?13135e65aabd0555bf71","19":"partners.js?13135e65aabd0555bf71","20":"mastergroup.js?13135e65aabd0555bf71","21":"board.js?f7ce02745eb119a748cc"};
+window.wadizWebManifest={"0":"0.js?4b2c953caafff6c7887a","1":"1.js?8ff0114a688944232c42","2":"2.js?25035a58b4f8c73f7b37","3":"3.js?fc4368f5c0ebd2b9e5b6","4":"4.js?7f17e5241f9c318064c3","5":"equity.js?e59c242fcea6241833a9","6":"landing.js?ab0468012ff1ad5c5585","7":"reward.js?bd3974a65ff259363d53","8":"equity-payment.js?6e6444968aaf543da6c6","9":"personal-message.js?2218450c86d5f7cde89b","10":"coming.js?78097e7d9683282e673e","11":"account.js?f43dcb948e3efa269316","12":"studio.js?16d0663b92d27ceafbee","13":"support-signature.js?be820fe2c74449b6a2f1","14":"equity-pre-quiz.js?db0704adb91c373264d1","15":"social.js?7f3ffdb4f9228d482664","16":"openfunding.js?8784fc957ae2177f83fd","17":"terms.js?13135e65aabd0555bf71","18":"school.js?13135e65aabd0555bf71","19":"partners.js?13135e65aabd0555bf71","20":"mastergroup.js?13135e65aabd0555bf71","21":"board.js?f7ce02745eb119a748cc"};
 window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
 <link rel="stylesheet" href="https://cdn.wadiz.kr/resources/assets/base.css?c041c4bdb8e1e0b0b0fc5c55a544fc9d"><script type="text/javascript" src="https://cdn.wadiz.kr/resources/assets/base.js?33637f5da60bb82a5a42"></script>
 <!-- S : page_head area -->
@@ -73,7 +73,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
 <!-- S : page style area -->
 
         <link href="/resources/Content/css/campaign/detail.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.wadiz.kr/resources/assets/reward.css?cf9b7709fd6413898e088511876e9004">
+        <link rel="stylesheet" href="https://cdn.wadiz.kr/resources/assets/reward.css?1c112d4ff364f1d96636584b831518d7">
         <!-- 아래는 추후 정리해야할 스타일시트 -->
         
 
@@ -408,14 +408,6 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
       <div class="campaign-action-container">
         <button type="button" class="campaign-like"><i class="icon-favorite-o"></i><i class="icon-favorite"></i><span class="text-hidden">좋아요</span></button>
         
-          <button type="button" class="wz button icon campaign-cheer-btn" onclick="postFeedMyFacebook()">
-            <span class="text-hidden">지지서명</span>
-            
-              
-              <i class="icon campaign-cheer-o"></i>
-            
-          </button>
-        
         
 
 
@@ -424,6 +416,20 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
 
 
 
+
+  
+  
+  
+   
+  
+    
+    
+    
+    <button name="campaign-askForEncore" class="wz-btn block primary" style="line-height:1" onclick="reopenRequest('19753')">앵콜 펀딩 요청하기 <sup style="font-size:9px">BETA</sup></button>
+    
+    
+    
+  
 
     
 <layout:put block="page_script" type="APPEND">
@@ -438,8 +444,6 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
 </layout:put>
         
         
-        
-          <button type="button" class="wz-btn primary block" onclick="backMoney('backing', 'false');">펀딩하기</button>
         
         
 
@@ -461,9 +465,9 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
           
           <li><a class="tab-link" href="#" onclick="campaignDetail('fundingInfo');">펀딩 안내</a></li>
           
-          <li><a class="tab-link" href="/web/campaign/detail/qa/19753">댓글 <span class="count-total comment-total">70<i class="icon-new"></i></span></a></li>
-          <li><a class="tab-link" href="/web/campaign/detailPost/19753">새소식 <span class="count-total">1</span></a></li>
-          <li><a class="tab-link" href="/web/campaign/detailBacker/19753">서포터 <span class="count-total">197<i class="icon-new"></i></span></a></li>  
+          <li><a class="tab-link" href="/web/campaign/detail/qa/19753">댓글 <span class="count-total comment-total">77</span></a></li>
+          <li><a class="tab-link" href="/web/campaign/detailPost/19753">새소식 <span class="count-total">2<i class="icon-new"></i></span></a></li>
+          <li><a class="tab-link" href="/web/campaign/detailBacker/19753">서포터 <span class="count-total">204<i class="icon-new"></i></span></a></li>  
         </ul>
       </div>
       <!-- E : 리워드 네비게이션 -->    
@@ -482,26 +486,25 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                   
                     
                     
+                      <p class="remaining-day success">펀딩성공</p>
+                      <p class="rate-bar"><em style="width:192%"></em></p>
                     
                     
-                    
-                      <p class="remaining-day">1일 남음</p>
-                    
-                    
-                    <p class="rate-bar"><em style="width:188%"></em></p>
                     
                   
-                  <p class="achievement-rate"><strong>188</strong>% 달성</p>
-                  <p class="total-amount"><strong>5,663,800</strong>원  펀딩</p>
-                  <p class="total-supporter"><strong>197</strong>명의 서포터</p>
+                  <p class="achievement-rate"><strong>192</strong>% 달성</p>
+                  <p class="total-amount"><strong>5,775,700</strong>원  펀딩</p>
+                  <p class="total-supporter"><strong>204</strong>명의 서포터</p>
                 </div>
                 
                 
                 
+                  
+                  
+                    <p class="end-text success"><strong>#매직올인원스마트링</strong> 프로젝트는 소중한 서포터들의 펀딩과 응원으로 2018.08.15에 성공적으로 종료되었습니다. </p>
+                  
+                  
                 
-                  <div class="btn-wrap funding">
-                    <button onclick="backMoney('backing', 'false');" class="wz-btn primary block">펀딩하기</button>
-                  </div>
                 
                 
 
@@ -513,6 +516,20 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
 
 
 
+
+  
+  
+  
+   
+  
+    
+    
+    
+    <button name="campaign-askForEncore" class="wz-btn block primary" style="line-height:1" onclick="reopenRequest('19753')">앵콜 펀딩 요청하기 <sup style="font-size:9px">BETA</sup></button>
+    
+    
+    
+  
 
     
 <layout:put block="page_script" type="APPEND">
@@ -528,7 +545,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
 
                 <div class="btn-wrap share">
                   <div class="btn-wrap-flex">
-                    <button id="btnLike" class="campaign-like btn-like"><i class="icon-like"></i> <em id="cntLike" class="cnt-like">91</em></button>
+                    <button id="btnLike" class="campaign-like btn-like"><i class="icon-like"></i> <em id="cntLike" class="cnt-like">98</em></button>
                     <button class="campaign-message btn-message"><i class="chat-o icon" aria-hidden="true"></i>문의</button>
                     <button id="btnShare" class="campaign-share btn-share" onclick="wadiz.share.kakaoSdkInit();">공유하기</button>
                   </div>
@@ -563,13 +580,6 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
               <!--S : 지지서명 정보  -->
               <h3 class="text-hidden">지지서명</h3>
               
-                <div
-                  id="campaign-support-signature"
-                  data-count="3593"
-                  data-campaign-id="19753"
-                  data-post-callback="postFeedMyFacebook"
-                ></div>
-              
               <!-- E : 지지서명 정보  -->
     
               <!-- S : 메이커 정보  -->
@@ -578,9 +588,9 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                 <div class="maker-box">
                   <div class="maker-info">
                     <dl>
-                      <dt><button onclick="goMakerProfile('449912223');" style="background-image:url(https://cdn.wadiz.kr/wwwwadiz/green002/2018/0703/20180703173015540_19753.jpg/wadiz/resize/92x92/format/jpg/quality/95/optimize);"></button></dt>
+                      <dt><button onclick="goMakerProfile('469473624');" style="background-image:url(https://cdn.wadiz.kr/wwwwadiz/green002/2018/0703/20180703173015540_19753.jpg/wadiz/resize/92x92/format/jpg/quality/95/optimize);"></button></dt>
                       <dd>
-                        <p class="name"><a href="#" onclick="goMakerProfile('449912223');">도마(인타코퍼레이션)</a></p>
+                        <p class="name"><a href="#" onclick="goMakerProfile('469473624');">도마(인타코퍼레이션)</a></p>
                         <ul class="website">
                           
                           <li><a href="http://www.intatech.co.kr" target="_blank" data-external-link>http://www.intatech.co.kr</a></li>
@@ -662,7 +672,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     <li>
-                      <button class="profile" onclick="goUserProfile('101734515')" style="background-image:url(/resources/static/img/common/img_blank.png)"></button>
+                      <button class="profile" onclick="goUserProfile('128863719')" style="background-image:url(/resources/static/img/common/img_blank.png)"></button>
                       <p class="name">권성기</p>
                       <p><span>5.6%</span> 기여</p>
                     </li>
@@ -693,7 +703,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     <li>
-                      <button class="profile" onclick="goUserProfile('1063563015')" style="background-image:url(/resources/static/img/common/img_blank.png)"></button>
+                      <button class="profile" onclick="goUserProfile('1347179819')" style="background-image:url(/resources/static/img/common/img_blank.png)"></button>
                       <p class="name">권동하</p>
                       <p><span>1.8%</span> 기여</p>
                     </li>
@@ -714,7 +724,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     <li>
-                      <button class="profile" onclick="goUserProfile('1053175515')" style="background-image:url(https://cdn.wadiz.kr/wwwwadiz/green002/sns_profile_pics/20180705152303924_1989152164452039.jpg/wadiz/resize/92x92/format/jpg/quality/95/optimize)"></button>
+                      <button class="profile" onclick="goUserProfile('1334022319')" style="background-image:url(https://cdn.wadiz.kr/wwwwadiz/green002/sns_profile_pics/20180705152303924_1989152164452039.jpg/wadiz/resize/92x92/format/jpg/quality/95/optimize)"></button>
                       <p class="name">허재호</p>
                       <p><span>1.4%</span> 기여</p>
                     </li>
@@ -725,7 +735,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     <li>
-                      <button class="profile" onclick="goUserProfile('265090515')" style="background-image:url(/resources/static/img/common/img_blank.png)"></button>
+                      <button class="profile" onclick="goUserProfile('335781319')" style="background-image:url(/resources/static/img/common/img_blank.png)"></button>
                       <p class="name">Basser</p>
                       <p><span>1.0%</span> 기여</p>
                     </li>
@@ -736,7 +746,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     <li>
-                      <button class="profile" onclick="goUserProfile('1044085515')" style="background-image:url(/resources/static/img/common/img_blank.png)"></button>
+                      <button class="profile" onclick="goUserProfile('1322508319')" style="background-image:url(/resources/static/img/common/img_blank.png)"></button>
                       <p class="name">김은희</p>
                       <p><span>1.0%</span> 기여</p>
                     </li>
@@ -747,7 +757,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     <li>
-                      <button class="profile" onclick="goUserProfile('208506015')" style="background-image:url(https://cdn.wadiz.kr/wwwwadiz/green001/fb_profile_pics/20160124142507938_874015389343023.jpg/wadiz/resize/92x92/format/jpg/quality/95/optimize)"></button>
+                      <button class="profile" onclick="goUserProfile('264107619')" style="background-image:url(https://cdn.wadiz.kr/wwwwadiz/green001/fb_profile_pics/20160124142507938_874015389343023.jpg/wadiz/resize/92x92/format/jpg/quality/95/optimize)"></button>
                       <p class="name">윤성욱</p>
                       <p><span>0.9%</span> 기여</p>
                     </li>
@@ -766,13 +776,6 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
     
               <!-- S : 모바일 지지서명  -->
               <div class="wz-sign-box-mobile">
-                
-                  <div
-                    id="campaign-support-signature"
-                    data-count="3593"
-                    data-campaign-id="19753"
-                    data-post-callback="postFeedMyFacebook"
-                  ></div>
                 
               </div>
               <!-- E : 모바일 지지서명  -->
@@ -794,7 +797,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                 <div class="wd-ui-gift">
                   <h3 class="project-right-title">리워드 선택</h3>
                   
-                  <button class="rightinfo-reward-list soldout ing" onclick="backMoney('43048', 'true')" >
+                  <button class="rightinfo-reward-list soldout "  >
                   <div class="top-info">
                     <dl class="reward-info">
                       <dt>
@@ -838,7 +841,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                   
                   </button>
                   
-                  <button class="rightinfo-reward-list  ing" onclick="backMoney('43049', 'false')" >
+                  <button class="rightinfo-reward-list soldout "  >
                   <div class="top-info">
                     <dl class="reward-info">
                       <dt>
@@ -868,21 +871,21 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     
+                      <p class="reward-qty soldout"><em>제한수량이 모두 펀딩되었습니다.</em></p>
                     
-                      <p class="reward-qty">제한수량 <strong>50</strong>개 &nbsp; <em>현재 1개 남음!</em></p>
                     
                     
-                    <p class="reward-soldcount">총 <strong>49</strong>개 펀딩완료</p>
+                    <p class="reward-soldcount">총 <strong>50</strong>개 펀딩완료</p>
                   </div>
                   
                   
+                    <p class="hover-text soldout">제한수량이<br/>모두 펀딩되었습니다.</p>
                   
-                    <p class="hover-text">이 리워드 펀딩하기</p>
                   
                   
                   </button>
                   
-                  <button class="rightinfo-reward-list  ing" onclick="backMoney('41684', 'false')" >
+                  <button class="rightinfo-reward-list  "  >
                   <div class="top-info">
                     <dl class="reward-info">
                       <dt>
@@ -913,10 +916,10 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     
-                      <p class="reward-qty">제한수량 <strong>100</strong>개 &nbsp; <em>현재 47개 남음!</em></p>
+                      <p class="reward-qty">제한수량 <strong>100</strong>개 &nbsp; </p>
                     
                     
-                    <p class="reward-soldcount">총 <strong>53</strong>개 펀딩완료</p>
+                    <p class="reward-soldcount">총 <strong>55</strong>개 펀딩완료</p>
                   </div>
                   
                   
@@ -926,7 +929,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                   
                   </button>
                   
-                  <button class="rightinfo-reward-list  ing" onclick="backMoney('41685', 'false')" >
+                  <button class="rightinfo-reward-list  "  >
                   <div class="top-info">
                     <dl class="reward-info">
                       <dt>
@@ -957,10 +960,10 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     
-                      <p class="reward-qty">제한수량 <strong>100</strong>개 &nbsp; <em>현재 55개 남음!</em></p>
+                      <p class="reward-qty">제한수량 <strong>100</strong>개 &nbsp; </p>
                     
                     
-                    <p class="reward-soldcount">총 <strong>45</strong>개 펀딩완료</p>
+                    <p class="reward-soldcount">총 <strong>47</strong>개 펀딩완료</p>
                   </div>
                   
                   
@@ -970,7 +973,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                   
                   </button>
                   
-                  <button class="rightinfo-reward-list  ing" onclick="backMoney('41689', 'false')" >
+                  <button class="rightinfo-reward-list  "  >
                   <div class="top-info">
                     <dl class="reward-info">
                       <dt>
@@ -1001,7 +1004,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     
-                      <p class="reward-qty">제한수량 <strong>100</strong>개 &nbsp; <em>현재 66개 남음!</em></p>
+                      <p class="reward-qty">제한수량 <strong>100</strong>개 &nbsp; </p>
                     
                     
                     <p class="reward-soldcount">총 <strong>34</strong>개 펀딩완료</p>
@@ -1014,7 +1017,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                   
                   </button>
                   
-                  <button class="rightinfo-reward-list  ing" onclick="backMoney('42497', 'false')" >
+                  <button class="rightinfo-reward-list  "  >
                   <div class="top-info">
                     <dl class="reward-info">
                       <dt>
@@ -1045,7 +1048,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     
-                      <p class="reward-qty">제한수량 <strong>9999</strong>개 &nbsp; <em>현재 9999개 남음!</em></p>
+                      <p class="reward-qty">제한수량 <strong>9999</strong>개 &nbsp; </p>
                     
                     
                     <p class="reward-soldcount">총 <strong>0</strong>개 펀딩완료</p>
@@ -1058,7 +1061,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                   
                   </button>
                   
-                  <button class="rightinfo-reward-list  ing" onclick="backMoney('42498', 'false')" >
+                  <button class="rightinfo-reward-list  "  >
                   <div class="top-info">
                     <dl class="reward-info">
                       <dt>
@@ -1089,7 +1092,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     
-                      <p class="reward-qty">제한수량 <strong>9999</strong>개 &nbsp; <em>현재 9995개 남음!</em></p>
+                      <p class="reward-qty">제한수량 <strong>9999</strong>개 &nbsp; </p>
                     
                     
                     <p class="reward-soldcount">총 <strong>4</strong>개 펀딩완료</p>
@@ -1102,7 +1105,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                   
                   </button>
                   
-                  <button class="rightinfo-reward-list  ing" onclick="backMoney('42499', 'false')" >
+                  <button class="rightinfo-reward-list  "  >
                   <div class="top-info">
                     <dl class="reward-info">
                       <dt>
@@ -1133,7 +1136,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     
-                      <p class="reward-qty">제한수량 <strong>9999</strong>개 &nbsp; <em>현재 9992개 남음!</em></p>
+                      <p class="reward-qty">제한수량 <strong>9999</strong>개 &nbsp; </p>
                     
                     
                     <p class="reward-soldcount">총 <strong>7</strong>개 펀딩완료</p>
@@ -1146,7 +1149,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                   
                   </button>
                   
-                  <button class="rightinfo-reward-list  ing" onclick="backMoney('42500', 'false')" >
+                  <button class="rightinfo-reward-list  "  >
                   <div class="top-info">
                     <dl class="reward-info">
                       <dt>
@@ -1177,7 +1180,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                     
                     
                     
-                      <p class="reward-qty">제한수량 <strong>9999</strong>개 &nbsp; <em>현재 9996개 남음!</em></p>
+                      <p class="reward-qty">제한수량 <strong>9999</strong>개 &nbsp; </p>
                     
                     
                     <p class="reward-soldcount">총 <strong>3</strong>개 펀딩완료</p>
@@ -1197,10 +1200,6 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
               <!-- S : 인기 프로젝트 리스트 -->
               <div id="normalpane" class="recommend-box-container">
                 
-                <div id="fixed-funding-btn" class="fixed-funding-btn">
-                  <button onclick="backMoney('backing', 'false');" class="wz-btn primary block">이 프로젝트 펀딩하기</button>
-                </div>
-                
                 
                 <!-- S : 프로젝트 신고하기 -->
                   <div class="wz-message-box project-report">
@@ -1218,42 +1217,42 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                   
                   <div class="item">
                     <div class="number">1</div>
-                    <div class="text"><a href="/web/campaign/detail/20864">세계 최초 헤드형 물 청소기 "스위틀" : 청소를 넘어 세척까지!!</a></div>
-                  </div>
-                  
-                  <div class="item">
-                    <div class="number">2</div>
-                    <div class="text"><a href="/web/campaign/detail/20923">세계최초 우퍼 ON!! OFF!!가 가능한 블루투스 우퍼이어셋 - 디버즈</a></div>
-                  </div>
-                  
-                  <div class="item">
-                    <div class="number">3</div>
                     <div class="text"><a href="/web/campaign/detail/21673">가장 간편한 음식물쓰레기 처리 솔루션</a></div>
                   </div>
                   
                   <div class="item">
-                    <div class="number">4</div>
-                    <div class="text"><a href="/web/campaign/detail/21856">여행용 캐리어 및 의류 진공압축포장의 혁명! -핸디형 진공 압축기</a></div>
+                    <div class="number">2</div>
+                    <div class="text"><a href="/web/campaign/detail/21183">입에 물고 단, 45초 양치끝. [V-WHITE 3D 전동칫솔]</a></div>
                   </div>
                   
                   <div class="item">
-                    <div class="number">5</div>
-                    <div class="text"><a href="/web/campaign/detail/21728">[앵콜] 누런이가 창피했다면? New 칼라 스위스 미백칫솔</a></div>
-                  </div>
-                  
-                  <div class="item">
-                    <div class="number">6</div>
+                    <div class="number">3</div>
                     <div class="text"><a href="/web/campaign/detail/21901">양말도 장비다! "발목압박 테이핑양말" 승리를 위한 나만의 치트키!!</a></div>
                   </div>
                   
                   <div class="item">
-                    <div class="number">7</div>
+                    <div class="number">4</div>
+                    <div class="text"><a href="/web/campaign/detail/21911">365일 빗물과 오염으로부터 지켜줄 "쉴더 발수코팅제"</a></div>
+                  </div>
+                  
+                  <div class="item">
+                    <div class="number">5</div>
+                    <div class="text"><a href="/web/campaign/detail/21547">이제 주방세제 그만 드세요. 100% 안전한 주방 씻을거리</a></div>
+                  </div>
+                  
+                  <div class="item">
+                    <div class="number">6</div>
                     <div class="text"><a href="/web/campaign/detail/22042">유선의 한계를 뛰어넘는 차량용 무선 청소기 　 <더쎈> </a></div>
                   </div>
                   
                   <div class="item">
+                    <div class="number">7</div>
+                    <div class="text"><a href="/web/campaign/detail/20864">세계 최초 헤드형 물 청소기 "스위틀" : 청소를 넘어 세척까지!!</a></div>
+                  </div>
+                  
+                  <div class="item">
                     <div class="number">8</div>
-                    <div class="text"><a href="/web/campaign/detail/21694">[앵콜] 한번만 안아주세요 :      유기견 후원 브랜드 1004ADT</a></div>
+                    <div class="text"><a href="/web/campaign/detail/21511">카시트만으로 외출준비가 끝난것은 아닙니다. 성장기 무릎보호 카시트발판</a></div>
                   </div>
                   
                   <div class="item">
@@ -1263,7 +1262,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
                   
                   <div class="item">
                     <div class="number">10</div>
-                    <div class="text"><a href="/web/campaign/detail/19948">나의 유전자가 필요로 하는 비타민, 왓비타 이네이트</a></div>
+                    <div class="text"><a href="/web/campaign/detail/21856">여행용 캐리어 및 의류 진공압축포장의 혁명! -핸디형 진공 압축기</a></div>
                   </div>
                      
                 </div>
@@ -1454,18 +1453,15 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
           
           
           
+          <p class="remaining-day success">펀딩성공</p>
+          <p class="rate-bar"><em style="width:192%"></em></p>
           
           
           
-          <p class="remaining-day">1일 남음</p>
           
-          
-          <p class="rate-bar"><em style="width:188%"></em></p>
-          
-          
-          <p class="achievement-rate"><strong>188</strong>% 달성</p>
-          <p class="total-amount"><strong>5,663,800</strong>원  펀딩</p>
-          <p class="total-supporter"><strong>197</strong>명의 서포터</p>
+          <p class="achievement-rate"><strong>192</strong>% 달성</p>
+          <p class="total-amount"><strong>5,775,700</strong>원  펀딩</p>
+          <p class="total-supporter"><strong>204</strong>명의 서포터</p>
         </div>
 
         
@@ -1473,11 +1469,12 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
         
         
         
-        <div class="btn-wrap funding">
-          <button onclick="backMoney('backing', 'false');" class="wz-btn primary block">펀딩하기</button>
-        </div>
+        <p class="end-text success"><strong>#매직올인원스마트링</strong> 프로젝트는 소중한 서포터들의 펀딩과 응원으로 2018.08.15에 성공적으로 종료되었습니다. </p>
         
         
+        
+        
+        
 
         
 
@@ -1487,6 +1484,20 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
 
 
 
+
+  
+  
+  
+   
+  
+    
+    
+    
+    <button name="campaign-askForEncore" class="wz-btn block primary" style="line-height:1" onclick="reopenRequest('19753')">앵콜 펀딩 요청하기 <sup style="font-size:9px">BETA</sup></button>
+    
+    
+    
+  
 
     
 <layout:put block="page_script" type="APPEND">
@@ -1502,7 +1513,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
 
         <div class="btn-wrap share">
           <div class="btn-wrap-flex">
-            <button class="campaign-like btn-like"><i class="icon-like"></i> <em id="cntLike" class="cnt-like">91</em></button>
+            <button class="campaign-like btn-like"><i class="icon-like"></i> <em id="cntLike" class="cnt-like">98</em></button>
             <button class="campaign-message btn-message"><i class="chat-o icon" aria-hidden="true"></i>문의</button>
             <button class="campaign-share btn-share" onclick="wadiz.share.kakaoSdkInit();">공유하기</button>
           </div>
@@ -1572,6 +1583,18 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
       <a href="/web/campaign/detailPost/19753" style="text-decoration: none;">
         
           <div class="wd-ui-update-link-list">
+            <span style="" class="wd-ui-update-link-list-title">지지서명 이벤트 당첨자 명단 발표</span>
+            
+            
+            
+            
+            
+              <em class="wd-icon-new-big"></em>
+            
+            <span class="wd-ui-update-link-list-when">2018.08.16</span>
+          </div>
+        
+          <div class="wd-ui-update-link-list">
             <span style="" class="wd-ui-update-link-list-title">"히든스마트링 100%달성"여름 바캉스 시즌 지지서명 이벤트</span>
             
             
@@ -1594,16 +1617,16 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
       data-campaign-id="19753"
       data-user-photo-url=""
       data-session-user=""
-      data-is-accessible-cmt="true"
-      data-total="70"
+      data-is-accessible-cmt="false"
+      data-total="77"
       data-is-detail-page="true"
     >
       <div class="reward-comment">
-        <p class="comment-num">댓글 <em class="comment-total">70</em></p>
+        <p class="comment-num">댓글 <em class="comment-total">77</em></p>
         <div v-if="fetching.init" class="wz-loader"></div>
           <reward-comment-list></reward-comment-list>
           <div class="main-comment">
-            <p class="comment-num" style="text-align:center;margin-top:20px">전체 <em class="comment-total">70</em>개의 댓글이 있습니다.</p>
+            <p class="comment-num" style="text-align:center;margin-top:20px">전체 <em class="comment-total">77</em>개의 댓글이 있습니다.</p>
             <div class="btn-wrap" style="text-align:center">
               <button class="wz-btn primary" onclick="location.href='/web/campaign/detail/qa/19753'">댓글 보러가기</button>
             </div>
@@ -1725,7 +1748,7 @@ window.wadiz = window.wadiz || {};window.wadiz.sessionUser="";</script>
 </div>
 <!-- S : page script area -->
 
-<script type="text/javascript" src="https://cdn.wadiz.kr/resources/assets/reward.js?08b59b430f2c075fd4a5"></script>
+<script type="text/javascript" src="https://cdn.wadiz.kr/resources/assets/reward.js?bd3974a65ff259363d53"></script>
 <script type="text/javascript" src="/resources/static/js/slick.min.js"></script>
 <script type="text/javascript" src="/resources/js/jquery/countdown/jquery.countdown.min.js"></script>
 <script type="text/javascript" src="/resources/static/js/reward.js"></script>
