@@ -24,6 +24,8 @@ def reward_list(request):
         WadizCrawler.get_product_list()
         WadizCrawler.get_reward_list()
 
+    print(f'{Product.objects.count()}개개만큼 롤링 완료')
+
     products = Product.objects.all()
 
     context = {

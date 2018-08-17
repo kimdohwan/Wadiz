@@ -3,6 +3,7 @@ from rest_framework.test import APITestCase
 import json
 
 from reward.models import Reward, Product
+from members.models import User, Funding
 
 
 def get_dummy_reward():
@@ -13,27 +14,33 @@ def get_dummy_reward():
         product_type='노트북',
         product_company_name='와디즈주식회사',
         product_img='노트북.jpg',
-        product_interested_count='100',
+        product_detail_img='노트북상세.jpg',
         product_start_time='2018-08-15',
         product_end_time='2018-08-20',
-        product_total_amount=2000000
+        product_cur_amount=100000,
+        product_total_amount=2000000,
+        product_interested_count=100,
+        product_description='2018년 금세기 최고의 노트북',
+        product_is_funding='A',
+        product_video_url='https://ryanden.kr',
     ) for notebook in notebook_list]
 
 
 def get_dummy_product():
-
     products = []
 
     for product in get_dummy_reward():
 
-        for num in range(3):
+        for num in range(1, 4):
             reward = Reward.objects.create(
                 reward_name=f'얼리버드{num}',
+                reward_option='블루',
                 reward_price=30000,
                 reward_shipping_charge=2500,
-                reward_expecting_departure_date='2018년 8월 8일',
+                reward_expecting_departure_date='2018.08.08',
                 reward_total_count=100,
                 reward_sold_count=5,
+                reward_on_sale=True,
                 product=product,
             )
             products.append(reward)
@@ -43,21 +50,23 @@ def get_dummy_product():
 class RewardListTest(APITestCase):
     URL = '/api/rewards/'
 
-    def test_reward_list_status_code(self):
+    def test_prodcut_list_status_code(self):
         response = self.client.get(self.URL)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_reward_list_count(self):
+    def test_product_list_count(self):
         get_dummy_reward()
         response = self.client.get(self.URL)
 
         data = json.loads(response.content)
 
-        self.assertEqual(len(data), Reward.objects.count())
+        self.assertEqual(len(data), Product.objects.count())
 
     def test_product_list(self):
-
         for product in get_dummy_product():
             print(product)
 
+    def test_funding_list(self):
+
+        get_dummy_product()
