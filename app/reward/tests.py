@@ -3,7 +3,7 @@ from rest_framework.test import APITestCase
 import json
 
 from reward.models import Reward, Product
-from members.models import User, Funding
+from members.models import User
 
 
 def get_dummy_reward():
@@ -47,6 +47,14 @@ def get_dummy_product():
     return products
 
 
+def get_dummy_user():
+    return User.objects.create(
+        username='lockstom2@gmail.com',
+        password='1',
+        nickname='lock'
+    )
+
+
 class RewardListTest(APITestCase):
     URL = '/api/rewards/'
 
@@ -57,16 +65,21 @@ class RewardListTest(APITestCase):
 
     def test_product_list_count(self):
         get_dummy_reward()
+        print(get_dummy_user())
         response = self.client.get(self.URL)
 
         data = json.loads(response.content)
 
         self.assertEqual(len(data), Product.objects.count())
 
-    def test_product_list(self):
-        for product in get_dummy_product():
-            print(product)
+    # def test_product_list(self):
+    #     for product in get_dummy_product():
+    #         print(product)
 
     def test_funding_list(self):
-
         get_dummy_product()
+
+        # Funding.objects.create(
+        #     user=get_dummy_user(),
+        #     reward=get_dummy_reward()[0]
+        # )
