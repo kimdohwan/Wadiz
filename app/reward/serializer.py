@@ -63,7 +63,8 @@ class ProductLikeSerializer(serializers.ModelSerializer):
 
 
 class FundingSerializer(serializers.ModelSerializer):
-    reward = RewardSerializer()
+    reward = RewardSerializer(many=True)
+    # user = UserSerializer()
 
     class Meta:
         model = Funding

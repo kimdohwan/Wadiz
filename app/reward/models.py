@@ -119,9 +119,9 @@ class Funding(models.Model):
         on_delete=models.CASCADE
     )
 
-    reward = models.ForeignKey(
+    reward = models.ManyToManyField(
         Reward,
-        on_delete=models.CASCADE
+        related_name='funding'
     )
 
     username = models.CharField(max_length=20)

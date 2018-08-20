@@ -26,6 +26,7 @@ class UserSerializer(serializers.ModelSerializer):
             'password',
             'nickname',
             'img_profile',
+            'funding_set'
         )
 
     def validate_password(self, value):
