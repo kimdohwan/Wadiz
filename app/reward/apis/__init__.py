@@ -1,6 +1,7 @@
 from rest_framework import generics, mixins, filters
-from ..models import Product, Reward
-from ..serializer import ProductSerializer, RewardSerializer, ProductDetailSerializer, ProductFundingSerializer
+from ..models import Product, Reward, ProductLike, Funding
+from ..serializer import ProductSerializer, RewardSerializer, ProductDetailSerializer, ProductFundingSerializer, \
+    ProductLikeSerializer, FundingSerializer
 from utils.paginations import ProductListPagination
 
 
@@ -24,6 +25,16 @@ class ProductCategoryList(generics.ListAPIView):
 
         return Product.objects.filter(product_type__contains=category, product_name__contains=product_name,
                                       product_is_funding__contains=is_funding)
+
+
+class ProductLikeList(generics.ListAPIView):
+    queryset = ProductLike.objects.all()
+    serializer_class = ProductLikeSerializer
+
+
+class FundingList(generics.ListAPIView):
+    queryset = Funding.objects.all()
+    serializer_class = FundingSerializer
 
 
 class ProductFundingList(mixins.RetrieveModelMixin, generics.GenericAPIView):

@@ -1,12 +1,14 @@
+from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.test import APITestCase
 import json
 
-from reward.models import Reward, Product
-from members.models import User, Funding
+from reward.models import Reward, Product, Funding
+
+User = get_user_model()
 
 
-def get_dummy_reward():
+def get_dummy_product():
     notebook_list = ['맥북', '그램', '맥북프로', '레노버']
 
     return [Product.objects.create(
@@ -26,12 +28,33 @@ def get_dummy_reward():
     ) for notebook in notebook_list]
 
 
-def get_dummy_product():
+def get_dummy_user():
+    return User.objects.create(
+        username='a@nasd.com',
+        password='1',
+        nickname='lock'
+    )
+
+
+def get_dummy_funding():
+    return Funding.objects.create(
+        user=get_dummy_user(),
+        username='홍길동',
+        phone_number='01012341234',
+        address1='서울',
+        address2='강남',
+        comment='경비실로',
+    )
+
+
+def get_dummy_reward():
     products = []
 
-    for product in get_dummy_reward():
+    funding = get_dummy_funding()
 
-        for num in range(1, 4):
+    for product in get_dummy_product():
+
+        for num in range(5):
             reward = Reward.objects.create(
                 reward_name=f'얼리버드{num}',
                 reward_option='블루',
@@ -42,6 +65,7 @@ def get_dummy_product():
                 reward_sold_count=5,
                 reward_on_sale=True,
                 product=product,
+                # funding=funding
             )
             products.append(reward)
     return products
@@ -63,10 +87,13 @@ class RewardListTest(APITestCase):
 
         self.assertEqual(len(data), Product.objects.count())
 
-    def test_product_list(self):
-        for product in get_dummy_product():
-            print(product)
+    # def test_product_list(self):
+    #     for product in get_dummy_product():
+    #         print(product)
 
-    def test_funding_list(self):
-
-        get_dummy_product()
+    # def test_funding_list(self):
+    #     reward = get_dummy_reward()
+    #
+    #
+    #
+    #     self.assertEqual(funding)
