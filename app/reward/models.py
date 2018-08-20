@@ -1,11 +1,13 @@
+from django.core.validators import RegexValidator
 from django.db import models
 
 # Create your models here.
 from django.conf import settings
 
+from members.models import User
+
 
 class Product(models.Model):
-
     ON = 'YA'
     OFF = 'NA'
 
@@ -31,9 +33,9 @@ class Product(models.Model):
     product_end_time = models.CharField(max_length=100)
 
     product_is_funding = models.CharField(
-            max_length=3,
-            choices=FUNDING_STATUS,
-            default=ON
+        max_length=3,
+        choices=FUNDING_STATUS,
+        default=ON
     )
 
     product_video_url = models.CharField(max_length=100)
@@ -47,7 +49,7 @@ class Product(models.Model):
     product_like_user = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         blank=True,
-        related_name='like_posts'
+        related_name='like_product'
     )
 
     def __str__(self):
@@ -55,6 +57,30 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['-pk']
+
+
+class ProductLike(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='like_products'
+    )
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name='likes'
+    )
+
+    liked_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def product_name(self):
+        return f'{self.product}'
+
+    @property
+    def user_name(self):
+        return f'{self.user}'
 
 
 class Reward(models.Model):
@@ -74,6 +100,8 @@ class Reward(models.Model):
 
     reward_on_sale = models.BooleanField(default=True)
 
+    reward_amount = models.PositiveIntegerField(default=0)
+
     product = models.ForeignKey(
         Product,
         blank=True,
@@ -83,6 +111,34 @@ class Reward(models.Model):
 
     def __str__(self):
         return f'{self.reward_name}'
+
+
+class Funding(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    reward = models.ForeignKey(
+        Reward,
+        on_delete=models.CASCADE
+    )
+
+    username = models.CharField(max_length=20)
+
+    phone_regex = RegexValidator(regex='\d{11}',
+                                 message="Phone number must be 11 numbers")
+    phone_number = models.CharField(validators=[phone_regex], max_length=11, blank=True)
+
+    address1 = models.CharField(max_length=30)
+
+    address2 = models.CharField(max_length=30)
+
+    comment = models.TextField()
+
+    requested_at = models.DateTimeField(auto_now_add=True)
+
+    cancel_at = models.DateTimeField(null=True)
 
 
 class Comment(models.Model):

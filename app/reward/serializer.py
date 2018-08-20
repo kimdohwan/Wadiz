@@ -1,6 +1,10 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from reward.models import Product, Reward
+from members.serializer import UserSerializer
+from reward.models import Product, Reward, ProductLike, Funding
+
+User = get_user_model()
 
 
 class RewardSerializer(serializers.ModelSerializer):
@@ -17,6 +21,7 @@ class RewardSerializer(serializers.ModelSerializer):
             'reward_total_count',
             'reward_sold_count',
             'reward_on_sale',
+            'reward_amount',
             'product',
         )
 
@@ -43,6 +48,40 @@ class ProductSerializer(serializers.ModelSerializer):
         )
 
 
+class ProductLikeSerializer(serializers.ModelSerializer):
+    liked_product = ProductSerializer(many=True)
+
+    class Meta:
+        model = ProductLike
+
+        fields = (
+            'pk',
+            'user',
+            'product',
+            'liked_at'
+        )
+
+
+class FundingSerializer(serializers.ModelSerializer):
+    reward = RewardSerializer()
+
+    class Meta:
+        model = Funding
+
+        fields = (
+            'pk',
+            'user',
+            'username',
+            'phone_number',
+            'address1',
+            'address2',
+            'comment',
+            'requested_at',
+            'cancel_at',
+            'reward'
+        )
+
+
 class ProductDetailSerializer(ProductSerializer):
     rewards = RewardSerializer(many=True)
 
@@ -65,10 +104,10 @@ class ProductDetailSerializer(ProductSerializer):
         )
 
 
-class ProductFundingSerializer(ProductSerializer):
+class ProductFundingSerializer(RewardSerializer):
     rewards = RewardSerializer(many=True)
 
-    class Meta(ProductSerializer.Meta):
+    class Meta(RewardSerializer.Meta):
         fields = (
             'pk',
             'product_name',

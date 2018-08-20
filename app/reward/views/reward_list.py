@@ -15,7 +15,7 @@ __all__ = (
 
 
 def reward_list(request):
-    # Product.objects.all().delete()
+    Product.objects.all().delete()
     # WadizCrawler.start()
     # WadizCrawler.create_detail_html()
     print('리워드 실행')
@@ -24,7 +24,7 @@ def reward_list(request):
         WadizCrawler.get_product_list()
         WadizCrawler.get_reward_list()
 
-    print(f'{Product.objects.count()}개개만큼 롤링 완료')
+    print(f'{Product.objects.count()}개만큼 크롤링 완료')
 
     products = Product.objects.all()
 
