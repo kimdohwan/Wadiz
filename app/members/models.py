@@ -8,11 +8,10 @@ from config.settings.base import STATIC_DIR
 
 
 class User(AbstractUser):
-    # blank_image_path = os.path.join(STATIC_DIR, 'static')
 
     img_profile = models.ImageField(
         upload_to='user',
-        # default=blank_image_path
+        default='user/blank_user.png'
     )
 
     nickname = models.CharField(max_length=16)
