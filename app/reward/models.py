@@ -100,8 +100,6 @@ class Reward(models.Model):
 
     reward_on_sale = models.BooleanField(default=True)
 
-    reward_amount = models.PositiveIntegerField(default=1)
-
     product = models.ForeignKey(
         Product,
         blank=True,
@@ -119,12 +117,15 @@ class Funding(models.Model):
         on_delete=models.CASCADE
     )
 
-    reward = models.ManyToManyField(
+    reward = models.ForeignKey(
         Reward,
+        on_delete=models.CASCADE,
         related_name='funding'
     )
 
     username = models.CharField(max_length=20)
+
+    reward_amount = models.PositiveIntegerField(default=1)
 
     phone_regex = RegexValidator(regex='\d{11}',
                                  message="Phone number must be 11 numbers")

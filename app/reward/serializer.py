@@ -21,7 +21,6 @@ class RewardSerializer(serializers.ModelSerializer):
             'reward_total_count',
             'reward_sold_count',
             'reward_on_sale',
-            'reward_amount',
             'product',
         )
 
@@ -122,3 +121,26 @@ class ProductLikeCreateSerializer(ProductSerializer):
             'product_name',
             'product_interested_count',
         )
+
+
+class FundingCreateItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Funding
+        fields = (
+            'reward_pk',
+            'amount',
+        )
+
+
+class FundingCreateSerializer(serializers.ModelSerializer):
+    # reward_list = FundingCreateRewardSerializer(many=True, write_only=True)
+
+    class Meta:
+        model = Funding
+        fields = (
+            'pk',
+            'reward_list',
+        )
+
+    def create(self, validated_data):
+        print(validated_data)

@@ -1,10 +1,13 @@
+import datetime
+
 from django.contrib.auth import get_user_model
 from rest_framework import generics, mixins, filters
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from ..models import Product, Reward, ProductLike, Funding
 from ..serializer import ProductSerializer, RewardSerializer, ProductDetailSerializer, ProductFundingSerializer, \
-    ProductLikeSerializer, FundingSerializer, ProductLikeCreateSerializer
+    ProductLikeSerializer, FundingSerializer, ProductLikeCreateSerializer, FundingCreateSerializer
 from utils.paginations import ProductListPagination
 
 User = get_user_model()
@@ -65,12 +68,65 @@ class ProductDetail(generics.RetrieveAPIView):
     serializer_class = ProductDetailSerializer
 
 
+class FundingCreate(APIView):
+    def post(self, request):
+        serializer = FundingCreateSerializer(request.data)
+        serializer.save()
+
+
 # 작명 (Api view 를 뒤에 추가 )
-# class ProductLikeCreate(generics.ListCreateAPIView):
-#     pass
+class FundingCreate(generics.ListCreateAPIView):
+    queryset = Funding.objects.all()
+    serializer_class = FundingCreateSerializer
+
+    # def post(self, request, *args, **kwargs):
+    #     user = User.objects.get(username=request.user)
+    #
+    #     reward_list = self.request.data.get('reward_list')
+    #     funding_list = []
+    #     try:
+    #         for item in reward_list:
+    #
+    #             reward = Reward.objects.get(pk=item['pk'])
+    #
+    #             print(type(reward))
+    #
+    #             funding = Funding.objects.create(
+    #                 user=user,
+    #                 reward=reward,
+    #                 reward_amount=int(item['reward_amount']),
+    #                 username=request.data['username'],
+    #                 phone_number=request.data['phone_number'],
+    #                 address1=request.data['address1'],
+    #                 address2=request.data['address2'],
+    #             )
+    #             funding_list.append(funding)
+    #     except ValueError:
+    #         print('적잘한 값이 오지 않았습니다.')
+    #
+    #     serializer = self.serializer_class(funding_list, many=True)
+    #
+    #     return Response(serializer.data)
+
+    def patch(self, request, *args, **kwargs):
+
+        funding_pk = self.request.data.get('pk')
+
+        user = User.objects.get(username=request.user)
+
+        funding = Funding.objects.filter(pk=funding_pk, user=user)
+
+        print(type(funding))
+
+        funding.cancel_at = datetime.datetime.now()
+
+        funding.save()
+
+        serializer = self.get_serializer_class()(funding)
+
+        return Response(serializer.data)
 
 
-# 좋아요를 누를때마다 좋아요 갯수가 오른다.
 class ProductLikeCreate(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     pagination_class = ProductListPagination
