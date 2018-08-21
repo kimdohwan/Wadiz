@@ -10,4 +10,6 @@ urlpatterns = [
     path('detail/<int:pk>/', apis.UserDetail.as_view()),
     path('signup/', apis.UserList.as_view(), name='signup'),
     path('activate/<str:uidb64>/<str:token>/', apis.UserActivate.as_view(), name='activate'),
+    path('change-info/', apis.UserDetail.as_view()),
+    path('myinfo/', apis.UserInfo.as_view()),
 ]

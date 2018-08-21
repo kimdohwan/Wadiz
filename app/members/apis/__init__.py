@@ -8,12 +8,12 @@ from rest_framework.authtoken.models import Token
 from rest_framework.compat import authenticate
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK
 from rest_framework.views import APIView
 from rest_framework import generics, status, permissions
-from urllib3 import HTTPResponse
 
 from members.token import account_activation_token
-from ..serializer import UserSerializer
+from ..serializer import UserSerializer, UserChangeInfoSerializer, UserDetailSerializer
 
 User = get_user_model()
 
@@ -32,9 +32,21 @@ class UserList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class UserDetail(APIView):
+    def get(self, request, pk):
+        serializer = UserDetailSerializer(User.objects.get(pk=pk))
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    permissions = (permissions.IsAuthenticated,)
+
+    def patch(self, request, *args, **kwargs):
+        user = User.objects.get(username=request.user)
+        serializer = UserChangeInfoSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class AuthToken(APIView):
@@ -68,9 +80,18 @@ class UserActivate(APIView):
             if user is not None and account_activation_token.check_token(user, token):
                 user.is_active = True
                 user.save()
-                return HttpResponse(user.email + '계정이 활성화 되었습니다', status=status.HTTP_200_OK)
+                return Response(user.email + '계정이 활성화 되었습니다', status=status.HTTP_200_OK)
             else:
-                return HttpResponse('만료된 링크입니다', status=status.HTTP_400_BAD_REQUEST)
+                return Response('만료된 링크입니다', status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
             print(traceback.format_exc())
+
+
+class UserInfo(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request):
+        user = User.objects.get(username=request.user)
+        serializer = UserSerializer(user)
+        return Response(serializer.data, HTTP_200_OK)
