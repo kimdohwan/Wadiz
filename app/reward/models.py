@@ -100,7 +100,7 @@ class Reward(models.Model):
 
     reward_on_sale = models.BooleanField(default=True)
 
-    reward_amount = models.PositiveIntegerField(default=0)
+    reward_amount = models.PositiveIntegerField(default=1)
 
     product = models.ForeignKey(
         Product,

@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
 
 from reward.models import Product, Reward, ProductLike, Funding
 
@@ -112,3 +113,14 @@ class ProductFundingSerializer(RewardSerializer):
             'product_name',
             'rewards',
         )
+
+
+class IncreaseProductCountSerializer(ProductSerializer):
+    class Meta(ProductSerializer.Meta):
+        fields = (
+            'product_name',
+            'product_interested_count',
+        )
+        read_only_fields = ['product_name', 'product_interested_count', 'product_detail_img', 'product_img',
+                            'product_type', 'product_start_time',
+                            'product_end_time', 'product_video_url']
