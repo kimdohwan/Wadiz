@@ -7,7 +7,8 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueValidator
 
-from members.token import account_activation_token
+from .token import account_activation_token
+from reward.serializer import FundingSerializer
 
 User = get_user_model()
 
@@ -16,6 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
     username = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
     password = serializers.SlugField(max_length=12, min_length=1, allow_blank=False, write_only=True)
     nickname = serializers.CharField(max_length=20, validators=[UniqueValidator(queryset=User.objects.all())])
+    funding_set = FundingSerializer(many=True)
 
     class Meta:
         model = User
