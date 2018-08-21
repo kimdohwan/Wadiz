@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 from ..models import Product, Reward, ProductLike, Funding
 from ..serializer import ProductSerializer, RewardSerializer, ProductDetailSerializer, ProductFundingSerializer, \
-    ProductLikeSerializer, FundingSerializer, IncreaseProductCountSerializer
+    ProductLikeSerializer, FundingSerializer, ProductLikeCreateSerializer
 from utils.paginations import ProductListPagination
 
 User = get_user_model()
@@ -66,20 +66,21 @@ class ProductDetail(generics.RetrieveAPIView):
 
 
 # 작명 (Api view 를 뒤에 추가 )
-class ProductLikeCreate(generics.ListCreateAPIView):
-    pass
+# class ProductLikeCreate(generics.ListCreateAPIView):
+#     pass
 
 
 # 좋아요를 누를때마다 좋아요 갯수가 오른다.
-class IncreaseInterestedCount(generics.ListCreateAPIView):
+class ProductLikeCreate(generics.ListCreateAPIView):
     queryset = Product.objects.all()
+    pagination_class = ProductListPagination
     serializer_class = ProductSerializer
 
     def get_serializer_class(self):
         serializer_class = self.serializer_class
 
-        if self.request.method == 'POST':
-            serializer_class = IncreaseProductCountSerializer
+        if self.request.method == 'PATCH':
+            serializer_class = ProductLikeCreateSerializer
 
             return serializer_class
 
@@ -88,11 +89,29 @@ class IncreaseInterestedCount(generics.ListCreateAPIView):
     def patch(self, request, *args, **kwargs):
         product_pk = self.request.data.get('pk')
 
+        user = User.objects.get(username=request.user)
+
         product = Product.objects.get(pk=product_pk)
 
-        product.product_interested_count += 1
+        # 이미 좋아요를 한기록이 있으면 좋아요 삭제 + DB 에서 좋아요 갯수감소
+        if ProductLike.objects.filter(user=user).exists():
 
-        product.save()
+            product.product_interested_count -= 1
+
+            ProductLike.objects.filter(user=user).delete()
+
+            product.save()
+
+        # 좋아요 기록이 없으면 좋아요 만들고 DB 에서 좋아요 갯수 증가
+        else:
+            ProductLike.objects.create(
+                user=user,
+                product=product,
+            )
+
+            product.product_interested_count += 1
+
+            product.save()
 
         serializer = self.get_serializer_class()(product)
 

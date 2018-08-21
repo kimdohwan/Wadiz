@@ -8,6 +8,6 @@ urlpatterns = [
     path('<int:pk>/', apis.ProductDetail.as_view()),
     path('<int:pk>/funding/', apis.ProductFundingList.as_view()),
     path('like_product/', apis.ProductLikeList.as_view()),
-    path('increase_interested_count/', apis.IncreaseInterestedCount.as_view()),
+    path('product_like/', apis.ProductLikeCreate.as_view()),
     path('funding_list/', apis.FundingList.as_view()),
 ]

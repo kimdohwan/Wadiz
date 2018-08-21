@@ -115,12 +115,9 @@ class ProductFundingSerializer(RewardSerializer):
         )
 
 
-class IncreaseProductCountSerializer(ProductSerializer):
+class ProductLikeCreateSerializer(ProductSerializer):
     class Meta(ProductSerializer.Meta):
         fields = (
             'product_name',
             'product_interested_count',
         )
-        read_only_fields = ['product_name', 'product_interested_count', 'product_detail_img', 'product_img',
-                            'product_type', 'product_start_time',
-                            'product_end_time', 'product_video_url']
