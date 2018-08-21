@@ -118,6 +118,7 @@ class ProductFundingSerializer(RewardSerializer):
 class ProductLikeCreateSerializer(ProductSerializer):
     class Meta(ProductSerializer.Meta):
         fields = (
+            'pk',
             'product_name',
             'product_interested_count',
         )
