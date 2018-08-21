@@ -14,9 +14,12 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
-    username = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all())])
-    password = serializers.SlugField(max_length=12, min_length=1, allow_blank=False, write_only=True)
-    nickname = serializers.CharField(max_length=20, validators=[UniqueValidator(queryset=User.objects.all())])
+    username = serializers.EmailField(
+        validators=[UniqueValidator(queryset=User.objects.all())])
+    password = serializers.SlugField(
+        max_length=12, min_length=1, allow_blank=False, write_only=True)
+    nickname = serializers.CharField(
+        max_length=20, validators=[UniqueValidator(queryset=User.objects.all())])
     funding_set = FundingSerializer(many=True)
 
     class Meta:
@@ -41,14 +44,13 @@ class UserSerializer(serializers.ModelSerializer):
             username=validated_data['username'],
             password=validated_data['password'],
             nickname=validated_data['nickname'],
-            # img_profile=validated_data['img_profile'],
         )
         user.is_active = False
         user.save()
 
         message = render_to_string('user/account_activate_email.html', {
             'user': user,
-            'domain': 'localhost:8000',
+            'domain': 'ryanden.kr',
             'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode('utf-8'),
             'token': account_activation_token.make_token(user),
         })
@@ -59,3 +61,37 @@ class UserSerializer(serializers.ModelSerializer):
         email.send()
 
         return validated_data
+
+
+class UserChangeInfoSerializer(serializers.ModelSerializer):
+    username = serializers.EmailField(
+        validators=[UniqueValidator(queryset=User.objects.all())])
+    password = serializers.SlugField(
+        max_length=12, min_length=1, allow_blank=False, write_only=True)
+    nickname = serializers.CharField(
+        max_length=20, validators=[UniqueValidator(queryset=User.objects.all())])
+
+    class Meta:
+        model = User
+        fields = (
+            'pk',
+            'username',
+            'password',
+            'nickname',
+            'img_profile',
+        )
+
+    def validate_password(self, value):
+        if value == self.initial_data.get('password1'):
+            return value
+        raise ValidationError('(password, password1) 불일치')
+
+
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'nickname',
+            'img_profile',
+        )
