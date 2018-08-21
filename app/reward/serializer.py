@@ -49,7 +49,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ProductLikeSerializer(serializers.ModelSerializer):
-    liked_product = ProductSerializer(many=True)
+    # liked_product = ProductSerializer(many=True)
 
     class Meta:
         model = ProductLike
@@ -64,7 +64,6 @@ class ProductLikeSerializer(serializers.ModelSerializer):
 
 class FundingSerializer(serializers.ModelSerializer):
     reward = RewardSerializer(many=True)
-    # user = UserSerializer()
 
     class Meta:
         model = Funding
@@ -108,7 +107,7 @@ class ProductDetailSerializer(ProductSerializer):
 class ProductFundingSerializer(RewardSerializer):
     rewards = RewardSerializer(many=True)
 
-    class Meta(RewardSerializer.Meta):
+    class Meta(ProductSerializer.Meta, RewardSerializer.Meta):
         fields = (
             'pk',
             'product_name',

@@ -9,7 +9,4 @@ urlpatterns = [
     path('<int:pk>/funding/', apis.ProductFundingList.as_view()),
     path('like_product/', apis.ProductLikeList.as_view()),
     path('funding_list/', apis.FundingList.as_view()),
-    # path('item/', apis.RewardList.as_view()),
-    # path('search/', apis.ProductFilterList.as_view()),
-    # path('search/product/', apis.ProductOrderingList.as_view()),
 ]
