@@ -8,7 +8,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueValidator
 
 from .token import account_activation_token
-from reward.serializer import FundingSerializer
+from reward.serializer import FundingSerializer, ProductLikeSerializer
 
 User = get_user_model()
 
@@ -21,6 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
     nickname = serializers.CharField(
         max_length=20, validators=[UniqueValidator(queryset=User.objects.all())])
     funding_set = FundingSerializer(many=True)
+    like_products = ProductLikeSerializer(many=True)
 
     class Meta:
         model = User
@@ -31,13 +32,14 @@ class UserSerializer(serializers.ModelSerializer):
             'password',
             'nickname',
             'img_profile',
+            'like_products',
             'funding_set'
         )
 
     def validate_password(self, value):
-        if value == self.initial_data.get('password1'):
+        if value == self.initial_data.get('check_password'):
             return value
-        raise ValidationError('(password, password1) 불일치')
+        raise ValidationError('(password, check_password) 불일치')
 
     def create(self, validated_data):
         user = User.objects.create_user(
@@ -82,9 +84,9 @@ class UserChangeInfoSerializer(serializers.ModelSerializer):
         )
 
     def validate_password(self, value):
-        if value == self.initial_data.get('password1'):
+        if value == self.initial_data.get('check_password'):
             return value
-        raise ValidationError('(password, password1) 불일치')
+        raise ValidationError('(password, check_password) 불일치')
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
