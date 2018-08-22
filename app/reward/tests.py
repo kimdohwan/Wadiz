@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 import json
 
-from reward.models import Reward, Product, Funding
+from reward.models import Reward, Product, Funding, FundingOrder
 
 User = get_user_model()
 
@@ -36,8 +36,8 @@ def get_dummy_user():
     )
 
 
-def get_dummy_funding():
-    return Funding.objects.create(
+def get_dummy_funding_order():
+    return FundingOrder.objects.create(
         user=get_dummy_user(),
         username='홍길동',
         phone_number='01012341234',
@@ -50,7 +50,7 @@ def get_dummy_funding():
 def get_dummy_reward():
     products = []
 
-    funding = get_dummy_funding()
+    # funding = get_dummy_funding_order()
 
     for product in get_dummy_product():
 
@@ -87,13 +87,6 @@ class RewardListTest(APITestCase):
 
         self.assertEqual(len(data), Product.objects.count())
 
-    # def test_product_list(self):
-    #     for product in get_dummy_product():
-    #         print(product)
+    # def test_funding_order(self):
 
-    # def test_funding_list(self):
-    #     reward = get_dummy_reward()
-    #
-    #
-    #
-    #     self.assertEqual(funding)
+

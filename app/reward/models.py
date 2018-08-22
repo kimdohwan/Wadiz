@@ -111,21 +111,8 @@ class Reward(models.Model):
         return f'{self.reward_name}'
 
 
-class Funding(models.Model):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE
-    )
-
-    reward = models.ForeignKey(
-        Reward,
-        on_delete=models.CASCADE,
-        related_name='funding'
-    )
-
+class FundingOrder(models.Model):
     username = models.CharField(max_length=20)
-
-    reward_amount = models.PositiveIntegerField(default=1)
 
     phone_regex = RegexValidator(regex='\d{11}',
                                  message="Phone number must be 11 numbers")
@@ -140,6 +127,27 @@ class Funding(models.Model):
     requested_at = models.DateTimeField(auto_now_add=True)
 
     cancel_at = models.DateTimeField(null=True)
+
+
+class Funding(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    reward = models.ForeignKey(
+        Reward,
+        on_delete=models.CASCADE,
+        related_name='funding'
+    )
+
+    order = models.ForeignKey(
+        FundingOrder,
+        on_delete=models.CASCADE,
+        related_name='order'
+    )
+
+    reward_amount = models.PositiveIntegerField(default=1)
 
 
 class Comment(models.Model):
