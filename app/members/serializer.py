@@ -4,7 +4,6 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
-from notebook.auth.security import set_password, passwd
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueValidator
@@ -71,7 +70,7 @@ class UserChangeInfoSerializer(serializers.ModelSerializer):
     username = serializers.EmailField(
         validators=[UniqueValidator(queryset=User.objects.all())])
     password = serializers.CharField(
-        max_length=12, min_length=1, allow_blank=False, write_only=True)
+        max_length=12, min_length=1, write_only=True)
     nickname = serializers.CharField(
         max_length=20, validators=[UniqueValidator(queryset=User.objects.all())])
 
@@ -85,10 +84,18 @@ class UserChangeInfoSerializer(serializers.ModelSerializer):
             'img_profile',
         )
 
-    def validate_password(self, value):
-        if value == self.initial_data.get('check_password'):
-            return value
-        raise ValidationError('(password, check_password) 불일치')
+    # def validate_password(self, value):
+    #     if self.instance.check_password(value):
+    #         return value
+    #     raise ValidationError('password 가 틀렸습니다')
+
+    def validate(self, data):
+        if self.instance.check_password(self.initial_data.get('password')):
+            if self.initial_data.get('new_password') == self.initial_data.get('check_password'):
+                data['password'] = make_password(self.initial_data.get('new_password'))
+                return data
+            raise ValidationError('(new_password, check_password) 불일치')
+        raise ValidationError('password 가 틀렸습니다')
 
 
 class UserDetailSerializer(serializers.ModelSerializer):
@@ -110,5 +117,6 @@ class UserDeleteSerializer(serializers.ModelSerializer):
 
     def validate_password(self, value):
         if self.instance.check_password(value):
+            value
             return value
         raise ValidationError('password 가 틀렸습니다')

@@ -1,7 +1,6 @@
 import traceback
 
 from django.contrib.auth import get_user_model
-from django.http import HttpResponse
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from rest_framework.authtoken.models import Token
