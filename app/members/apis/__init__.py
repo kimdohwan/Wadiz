@@ -13,7 +13,7 @@ from rest_framework.views import APIView
 from rest_framework import generics, status, permissions
 
 from members.token import account_activation_token
-from ..serializer import UserSerializer, UserChangeInfoSerializer, UserDetailSerializer
+from ..serializer import UserSerializer, UserChangeInfoSerializer, UserDetailSerializer, UserDeleteSerializer
 
 User = get_user_model()
 
@@ -45,8 +45,15 @@ class UserDetail(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def post(self, request):
+        user = User.objects.get(username=request.user)
+        serializer = UserDeleteSerializer(user, data=request.data)
+        if serializer.is_valid():
+            user.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(serializer.errors, status=status.HTTP_403_FORBIDDEN)
 
 
 class AuthToken(APIView):

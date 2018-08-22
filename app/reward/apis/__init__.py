@@ -1,10 +1,14 @@
+import datetime
+
 from django.contrib.auth import get_user_model
 from rest_framework import generics, mixins, filters
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from ..models import Product, Reward, ProductLike, Funding
+from ..models import Product, Reward, ProductLike, Funding, FundingOrder
 from ..serializer import ProductSerializer, RewardSerializer, ProductDetailSerializer, ProductFundingSerializer, \
-    ProductLikeSerializer, FundingSerializer, ProductLikeCreateSerializer
+    ProductLikeSerializer, FundingSerializer, ProductLikeCreateSerializer, FundingCreateSerializer, \
+    FundingOrderCreateSerializer
 from utils.paginations import ProductListPagination
 
 User = get_user_model()
@@ -66,11 +70,34 @@ class ProductDetail(generics.RetrieveAPIView):
 
 
 # 작명 (Api view 를 뒤에 추가 )
-# class ProductLikeCreate(generics.ListCreateAPIView):
-#     pass
+class FundingCreate(generics.ListCreateAPIView):
+    queryset = FundingOrder.objects.all()
+    serializer_class = FundingCreateSerializer
+
+    def patch(self, request, *args, **kwargs):
+        funding_pk = self.request.data.get('pk')
+
+        user = User.objects.get(username=request.user)
+
+        funding = Funding.objects.filter(pk=funding_pk, user=user)
+
+        print(type(funding))
+
+        funding.cancel_at = datetime.datetime.now()
+
+        funding.save()
+
+        serializer = self.get_serializer_class()(funding)
+
+        return Response(serializer.data)
 
 
-# 좋아요를 누를때마다 좋아요 갯수가 오른다.
+class FundingOrderCreate(generics.ListCreateAPIView):
+    queryset = Funding.objects.all()
+    serializer_class = FundingOrderCreateSerializer
+
+
+
 class ProductLikeCreate(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     pagination_class = ProductListPagination

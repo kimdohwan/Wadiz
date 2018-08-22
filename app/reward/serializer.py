@@ -1,8 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from rest_framework.serializers import ModelSerializer
 
-from reward.models import Product, Reward, ProductLike, Funding
+from reward.models import Product, Reward, ProductLike, Funding, FundingOrder
 
 User = get_user_model()
 
@@ -21,7 +20,6 @@ class RewardSerializer(serializers.ModelSerializer):
             'reward_total_count',
             'reward_sold_count',
             'reward_on_sale',
-            'reward_amount',
             'product',
         )
 
@@ -49,8 +47,6 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ProductLikeSerializer(serializers.ModelSerializer):
-    # liked_product = ProductSerializer(many=True)
-
     class Meta:
         model = ProductLike
 
@@ -62,15 +58,11 @@ class ProductLikeSerializer(serializers.ModelSerializer):
         )
 
 
-class FundingSerializer(serializers.ModelSerializer):
-    reward = RewardSerializer(many=True)
-
+class FundingOrderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Funding
+        model = FundingOrder
 
         fields = (
-            'pk',
-            'user',
             'username',
             'phone_number',
             'address1',
@@ -78,7 +70,21 @@ class FundingSerializer(serializers.ModelSerializer):
             'comment',
             'requested_at',
             'cancel_at',
-            'reward'
+        )
+
+
+class FundingSerializer(serializers.ModelSerializer):
+    reward = RewardSerializer()
+    order = FundingOrderSerializer()
+
+    class Meta:
+        model = Funding
+
+        fields = (
+            'pk',
+            'reward',
+            'order',
+            'reward_amount'
         )
 
 
@@ -122,3 +128,64 @@ class ProductLikeCreateSerializer(ProductSerializer):
             'product_name',
             'product_interested_count',
         )
+
+
+class FundingOrderCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Funding
+        fields = (
+            'id',
+            'user',
+            'reward',
+            'order',
+            'reward_amount',
+        )
+
+    def create(self, validated_data):
+        print(validated_data)
+
+        print('리워드 pk : ', validated_data['reward'].pk)
+
+        reward = validated_data['reward'].pk
+
+        if reward.reward_total_count > reward.reward_sold_count:
+            order = Funding.objects.create(
+                user=validated_data['user'],
+                reward=validated_data['reward'],
+                order=validated_data['order'],
+                reward_amount=validated_data['reward_amount']
+            )
+
+            reward.reward_sold_count += 1
+            reward.save()
+
+        return order
+
+    def update(self, instance, validated_data):
+        pass
+
+
+class FundingCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FundingOrder
+        fields = (
+            'pk',
+            'username',
+            'phone_number',
+            'address1',
+            'address2',
+            'comment'
+        )
+
+    def create(self, validated_data):
+        funding = FundingOrder.objects.create(
+            username=validated_data['username'],
+            phone_number=validated_data['phone_number'],
+            address1=validated_data['address1'],
+            address2=validated_data['address2'],
+            comment=validated_data.get('comment')
+        )
+
+        print(validated_data)
+
+        return funding
