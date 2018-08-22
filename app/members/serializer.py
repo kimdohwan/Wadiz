@@ -1,8 +1,10 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
+from notebook.auth.security import set_password, passwd
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.validators import UniqueValidator
@@ -16,7 +18,7 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     username = serializers.EmailField(
         validators=[UniqueValidator(queryset=User.objects.all())])
-    password = serializers.SlugField(
+    password = serializers.CharField(
         max_length=12, min_length=1, allow_blank=False, write_only=True)
     nickname = serializers.CharField(
         max_length=20, validators=[UniqueValidator(queryset=User.objects.all())])
@@ -68,7 +70,7 @@ class UserSerializer(serializers.ModelSerializer):
 class UserChangeInfoSerializer(serializers.ModelSerializer):
     username = serializers.EmailField(
         validators=[UniqueValidator(queryset=User.objects.all())])
-    password = serializers.SlugField(
+    password = serializers.CharField(
         max_length=12, min_length=1, allow_blank=False, write_only=True)
     nickname = serializers.CharField(
         max_length=20, validators=[UniqueValidator(queryset=User.objects.all())])
@@ -97,3 +99,16 @@ class UserDetailSerializer(serializers.ModelSerializer):
             'nickname',
             'img_profile',
         )
+
+
+class UserDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'password',
+        )
+
+    def validate_password(self, value):
+        if self.instance.check_password(value):
+            return value
+        raise ValidationError('password 가 틀렸습니다')
