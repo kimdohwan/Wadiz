@@ -18,7 +18,7 @@ selenium = "*"
 requests = "*"
 django-filter = "*"
 raven = "*"
-
+django-cors-headers = "*"
 
 [dev-packages]
 awsebcli = "*"

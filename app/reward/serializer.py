@@ -149,7 +149,6 @@ class FundingOrderCreateSerializer(serializers.ModelSerializer):
         reward = validated_data['reward'].pk
 
         if reward.reward_total_count > reward.reward_sold_count:
-
             order = Funding.objects.create(
                 user=validated_data['user'],
                 reward=validated_data['reward'],
@@ -164,7 +163,6 @@ class FundingOrderCreateSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         pass
-
 
 
 class FundingCreateSerializer(serializers.ModelSerializer):
